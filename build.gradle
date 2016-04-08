@@ -40,6 +40,15 @@ dependencies {
     compile("com.google.guava:guava:19.0")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-tomcat")
+    compile("io.reactivex:rxjava:1.1.2")
+    compile("com.google.guava:guava:19.0")
+    compile("com.netflix.hystrix:hystrix-core:1.5.1")
+    compile("com.netflix.hystrix:hystrix-metrics-event-stream:1.5.1")
+    compile("com.netflix.hystrix:hystrix-codahale-metrics-publisher:1.5.1") {
+        exclude group: "com.codahale.metrics", module: "metrics-core"
+    }
+    compile("io.dropwizard.metrics:metrics-core:3.1.0")
+    compile("io.dropwizard.metrics:metrics-graphite:3.1.0")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

@@ -1,5 +1,7 @@
 package example.controller;
 
+import example.controller.CommandModule.BetterCommand;
+import example.controller.CommandModule.BuggyCommand;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
@@ -37,26 +39,29 @@ public class AsyncController {
         }
         return System.currentTimeMillis() - start;
     }
-}
 
-
-class Service implements Callable<Long> {
-
-    private final Long value;
-
-    public Service(Long value) {
-        this.value = value;
+    @RequestMapping({"/hs"})
+    public String hy() {
+        new BuggyCommand("mert").execute();
+        return new BetterCommand("mert").execute();
     }
 
-    @Override
-    public Long call() {
-        try {
-            TimeUnit.SECONDS.sleep(value);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+    class Service implements Callable<Long> {
+
+        private final Long value;
+
+        public Service(Long value) {
+            this.value = value;
         }
-        return System.currentTimeMillis();
+
+        @Override
+        public Long call() {
+            try {
+                TimeUnit.SECONDS.sleep(value);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return System.currentTimeMillis();
+        }
     }
 }
-
-

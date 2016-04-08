@@ -1,0 +1,17 @@
+server:
+  port: 10556
+
+
+endpoints:
+  restart:
+    enabled: true
+  shutdown:
+    enabled: true
+  health:
+    sensitive: false
+
+logging:
+  level:
+    example:  DEBUG
+    com:
+      netflix: DEBUG
